@@ -2,12 +2,13 @@ from Bio import SeqIO
 from Bio.Data.CodonTable import TranslationError
 from Bio.SeqRecord import SeqRecord
 import argparse
+import tqdm
 
 
 def fna_2_faa(fna_filepath: str, faa_filepath: str):
     skipped = 0
     with open(faa_filepath, 'w') as aa_fa:
-        for dna_record in SeqIO.parse(fna_filepath, 'fasta'):
+        for dna_record in tqdm.tqdm(SeqIO.parse(fna_filepath, 'fasta'),  desc='reqding faa', unit='lines'):
             # generate all translation frames
             try:
                 aa_seqs = dna_record.seq.translate(cds=True, table=11, stop_symbol="")
