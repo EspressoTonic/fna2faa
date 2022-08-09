@@ -5,6 +5,7 @@ import argparse
 
 
 def fna_2_faa(fna_filepath: str, faa_filepath: str):
+    skipped = 0
     with open(faa_filepath, 'w') as aa_fa:
         for dna_record in SeqIO.parse(fna_filepath, 'fasta'):
             # generate all translation frames
@@ -14,7 +15,7 @@ def fna_2_faa(fna_filepath: str, faa_filepath: str):
                 try:
                     aa_seqs = dna_record.seq.translate(cds=True, table=4, stop_symbol="")
                 except:
-                    print(dna_record.id)
+                    skipped += 1
                     continue
             except:
                 print("funny!")
@@ -23,6 +24,7 @@ def fna_2_faa(fna_filepath: str, faa_filepath: str):
             aa_record = SeqRecord(aa_seqs, id=dna_record.id, description="")
 
             SeqIO.write(aa_record, aa_fa, 'fasta')
+    print(skipped)
 
 
 if __name__ == '__main__':
