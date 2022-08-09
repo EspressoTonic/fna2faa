@@ -11,7 +11,11 @@ def fna_2_faa(fna_filepath: str, faa_filepath: str):
             try:
                 aa_seqs = dna_record.seq.translate(cds=True, table=11, stop_symbol="")
             except TranslationError:
-                aa_seqs = dna_record.seq.translate(cds=True, table=4, stop_symbol="")
+                try:
+                    aa_seqs = dna_record.seq.translate(cds=True, table=4, stop_symbol="")
+                except:
+                    print(aa_seqs)
+                    exit(1)
             except:
                 print("funny!")
 
