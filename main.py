@@ -1,5 +1,6 @@
 from Bio import SeqIO
 from Bio.SeqRecord import SeqRecord
+import argparse
 
 
 def fna_2_faa(fna_filepath: str, faa_filepath: str):
@@ -12,3 +13,12 @@ def fna_2_faa(fna_filepath: str, faa_filepath: str):
             aa_record = SeqRecord(aa_seqs, id=dna_record.id, description="")
 
             SeqIO.write(aa_record, aa_fa, 'fasta')
+
+
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser(description="")
+    parser.add_argument('fna', type=str)
+    parser.add_argument('faa', type=str)
+    args = parser.parse_args()
+    fna_2_faa(args.fna, args.faa)
+
