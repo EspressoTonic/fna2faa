@@ -14,12 +14,8 @@ def fna_2_faa(fna_filepath: str, faa_filepath: str):
                 try:
                     aa_seqs = dna_record.seq.translate(cds=True, table=4, stop_symbol="")
                 except:
-                    print(dna_record.seq)
                     print(dna_record.id)
-                    print(dna_record.annotations)
-                    print(dna_record.description)
-                    print(dna_record.features)
-                    exit(1)
+                    continue
             except:
                 print("funny!")
 
