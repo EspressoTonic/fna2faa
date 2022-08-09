@@ -14,7 +14,7 @@ def fna_2_faa(fna_filepath: str, faa_filepath: str):
                 try:
                     aa_seqs = dna_record.seq.translate(cds=True, table=4, stop_symbol="")
                 except:
-                    print(aa_seqs)
+                    print(dna_record.seq)
                     exit(1)
             except:
                 print("funny!")
